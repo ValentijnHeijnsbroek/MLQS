@@ -41,12 +41,15 @@ class CreateDataset:
         self.data_table = pd.DataFrame(index=timestamps, columns=c, dtype=object)
 
     # Add numerical data, we assume timestamps in the form of nanoseconds from the epoch
-    def add_numerical_dataset(self, file, timestamp_col, value_cols, aggregation='avg', prefix=''):
+    def add_numerical_dataset(self, file, timestamp_col, value_cols, aggregation='avg', prefix='', time_unit=None, rename=None):
         print(f'Reading data from {file}')
         dataset = pd.read_csv(self.base_dir / file, skipinitialspace=True)
 
+        if rename:
+            dataset = dataset.rename(columns=rename)
+
         # Convert timestamps to dates
-        dataset[timestamp_col] = pd.to_datetime(dataset[timestamp_col])
+        dataset[timestamp_col] = pd.to_datetime(dataset[timestamp_col], unit=time_unit)
 
         # Create a table based on the times found in the dataset
         if self.data_table is None:
