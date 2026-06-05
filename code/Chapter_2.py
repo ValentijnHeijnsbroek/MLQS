@@ -117,7 +117,6 @@ axes_flat[0].legend(ncol=3, fontsize=7, loc='upper right')
 axes_flat[5].set_visible(False)
 fig.tight_layout(pad=0.8)
 fig.savefig(FIGURES / 'timeseries_activities.png', dpi=150, bbox_inches='tight')
-fig.savefig(FIGURES / 'timeseries_activities.pdf', dpi=150, bbox_inches='tight')
 plt.close()
 print('  Saved timeseries_activities')
 
